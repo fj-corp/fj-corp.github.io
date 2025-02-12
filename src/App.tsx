@@ -1,26 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import ParticleConfig from './components/ParticleConfig'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Typewriter } from 'react-simple-typewriter'
+import { Button } from '@/components/ui/button'
+import { IoIosLink } from "react-icons/io"
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <> 
+      <div className="fixed inset-0 -z-10">
+        <ParticleConfig />
+      </div>
+      <div className="flex flex-col items-center text-center space-y-8 -mt-75 overflow-hidden logo">
+        <Avatar className="h-56 w-52">
+          <AvatarImage src="./image.jpg" />
+          <AvatarFallback>FJ</AvatarFallback>
+        </Avatar>
+        
+        <h2 className="text-4xl dark:text-white px-4">
+          Hi, I'm a{' '}
+          <span className="text-blue-400">
+            <Typewriter
+              words={['Software Engineer.', 'Full Stack Developer.', 'Systems Engineer.', 'Habitual Liar.', 'Tinkerer.']}
+              loop={true}
+              cursor={true}
+              cursorStyle="_"
+              typeSpeed={50}
+              deleteSpeed={50}
+              delaySpeed={1000}
+            />
+          </span>
+        </h2>
+      </div>
+      <div className="flex flex-row justify-center text-center space-x-4">
+        <Button asChild variant="secondary" className='px-6 py-3 text-lg'>
+          <a href='https://docs.google.com/document/d/1nff0UoRnpBPTZFWd-I858IIq7QHipx5-pEZeWrpgHOg/edit?usp=sharing' className='color-change-a'>Resume <IoIosLink /></a>
+        </Button>
+        <Button asChild variant="secondary" className='px-6 py-3 text-lg'>
+         <a className='color-change-a'>What am I upto</a>
+        </Button>
+      </div>
+    </>
+  )
 }
 
-export default App;
+export default App
