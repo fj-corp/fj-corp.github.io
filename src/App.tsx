@@ -34,10 +34,10 @@ function App() {
         </h2>
       </div>
       <div className="flex flex-row justify-center text-center space-x-4">
-        <Button asChild variant="secondary" className='px-6 py-3 text-lg text-white bg-transparent'>
+        <Button asChild variant="outline" className='px-6 py-3 text-lg text-white'>
           <a href='https://docs.google.com/document/d/1nff0UoRnpBPTZFWd-I858IIq7QHipx5-pEZeWrpgHOg/edit?usp=sharing' className='color-change-a'>Resume <IoIosLink /></a>
         </Button>
-        <Button asChild variant="secondary" className='px-6 py-3 text-lg text-white bg-transparent'>
+        <Button asChild variant="outline" className='px-6 py-3 text-lg text-white'>
          <a className='color-change-a'>What I've been upto</a>
         </Button>
       </div>
