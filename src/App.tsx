@@ -8,8 +8,8 @@ import { IoIosLink } from "react-icons/io"
 function App() {
 
   return (
-    <> 
-      <div className="fixed inset-0 -z-10">
+    <div> 
+      <div className="fixed inset-0 -z-10 w-full">
         <ParticleConfig />
       </div>
       <div className="flex flex-col items-center text-center space-y-8 -mt-75 overflow-hidden logo">
@@ -18,7 +18,7 @@ function App() {
           <AvatarFallback>FJ</AvatarFallback>
         </Avatar>
         
-        <h2 className="text-4xl px-4">
+        <h2 className="text-4xl px-4 text-white">
           Hi, I'm a{' '}
           <span className="text-blue-400">
             <Typewriter
@@ -34,14 +34,14 @@ function App() {
         </h2>
       </div>
       <div className="flex flex-row justify-center text-center space-x-4">
-        <Button asChild variant="outline" className='px-6 py-3 text-lg text-white'>
+        <Button asChild variant="outline" className='px-3 sm:px-6 py-2 sm:py-3 text-lg bg-transparent border-white'>
           <a href='https://docs.google.com/document/d/1nff0UoRnpBPTZFWd-I858IIq7QHipx5-pEZeWrpgHOg/edit?usp=sharing' className='color-change-a'>Resume <IoIosLink /></a>
         </Button>
-        <Button asChild variant="outline" className='px-6 py-3 text-lg text-white'>
+        <Button asChild variant="outline" className='px-3 sm:px-6 py-2 sm:py-3 text-lg bg-transparent border-white'>
          <a className='color-change-a'>What I've been upto</a>
         </Button>
       </div>
-    </>
+    </div>
   )
 }
 
