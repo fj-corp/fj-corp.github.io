@@ -1,8 +1,12 @@
-
+import './Explore.css'
 
 function Explore() {
     return (
-        <h2>Coming soon.</h2>
+        <div>
+            <div className='text-4xl text-white mt-10 ml-8'>
+                <h1>Current Projects</h1>
+            </div>
+        </div>
     )
 }
 
