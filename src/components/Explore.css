@@ -1,0 +1,15 @@
+.heading-override {
+    font-weight: 200;
+    color: #98b65a !important;
+    text-decoration: inherit;
+}
+
+.a-override {
+    font-weight: 300;
+    color: #ffffff !important;
+    text-decoration: inherit;
+}
+
+.a-override:hover {
+    color: #98b65a !important;
+  }
