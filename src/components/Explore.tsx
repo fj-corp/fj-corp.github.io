@@ -27,7 +27,7 @@ function Explore() {
                         </a>
                     </h1>
                     <p className='mt-6 break-words'>
-                        <span className='text-white'>This is a real-time anomaly detection system that processes data streams on the fly. It simulates noisy 
+                        <span className='text-white'>This project is a real-time anomaly detection system that processes data streams to detect anomalies. It simulates noisy 
                             seasonal data and identifies anomalies using a combination of Z-score and Exponential Moving Average (EMA), making it more 
                             adaptable than traditional methods. Unlike Local Outlier Factor (LOF), it captures subtle changes that might go unnoticed. 
                             It’s built from scratch without SciPy, providing an efficient and mathematically transparent approach to anomaly detection.
