@@ -27,12 +27,16 @@ function Explore() {
                         </a>
                     </h1>
                     <p className='mt-6 break-words'>
-                        <span className='text-white'>This project is a real-time anomaly detection system that processes data streams to detect anomalies. It simulates noisy 
-                            seasonal data and identifies anomalies using a combination of Z-score and Exponential Moving Average (EMA), making it more 
+                        <span className='text-white'>Project simulates noisy seasonal data and identifies anomalies using a combination of Z-score and Exponential Moving Average (EMA), making it more 
                             adaptable than traditional methods. Unlike Local Outlier Factor (LOF), it captures subtle changes that might go unnoticed. 
                             It’s built from scratch without SciPy, providing an efficient and mathematically transparent approach to anomaly detection.
                             The motivation behind this project was to understand the mathematics behind traditional SciPy algorithms that heavily utilize machine learning,
-                            where a user might not understand the underlying mathematics. This project has been a part of my ongoing research in the field of anomaly detection.
+                            where a user might not understand the underlying mathematics. This project has been a part of my ongoing interest in the world of anomaly detection with and without Scikit.
+                        </span>
+                    </p>
+                    <p className='mt-2 break-words'>
+                        <span className='text-white'>
+                            Technologies used: Python, Matlab, Numpy
                         </span>
                     </p>
                     <p className='mt-2 break-words'>

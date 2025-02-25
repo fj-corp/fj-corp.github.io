@@ -21,7 +21,7 @@ const ParticleConfig = () => {
     const options: ISourceOptions = useMemo(
         () => ({
             background: {
-                color: "#000", // Background color
+                color: "#061117", // Background color
             },
             backgroundMode: {
                 enable: true,
