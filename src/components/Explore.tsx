@@ -35,7 +35,7 @@ function Explore() {
                         </span>
                     </p>
                     <p className='mt-2 break-words'>
-                        <span className='text-white'>
+                        <span className='text-white text-bold'>
                             Technologies used: Python, Matlab, Numpy
                         </span>
                     </p>
