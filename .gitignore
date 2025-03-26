@@ -12,6 +12,23 @@ dist
 dist-ssr
 *.local
 
+# Credentials / leetcode-endpoint
+leetcode-endpoint/*.json
+leetcode-endpoint/firebaseAuth.py
+leetcode-endpoint/pyvenv.cfg
+leetcode-endpoint/bin
+leetcode-endpoint/include
+leetcode-endpoint/lib*
+leetcode-endpoint/setEnvironmentVariables.py
+leetcode-endpoint/firebaseAuth.py
+
+# Python
+__pycache__/
+*.pyc
+*.pyd
+.venv/
+venv/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,5 +39,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-leetcode-endpoint
 build_script.sh
