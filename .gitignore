@@ -21,6 +21,7 @@ leetcode-endpoint/include
 leetcode-endpoint/lib*
 leetcode-endpoint/setEnvironmentVariables.py
 leetcode-endpoint/firebaseAuth.py
+src/components/firebase.ts
 
 # Python
 __pycache__/
