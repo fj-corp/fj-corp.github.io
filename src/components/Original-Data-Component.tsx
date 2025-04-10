@@ -65,7 +65,6 @@ function OriginalDataComponent() {
           worth_reviewing: doc.data().worth_reviewing,
           question: doc.data().question,
           difficulty: doc.data().difficulty,
-          additional_comments: doc.data().additional_comments,
         }));
         setOriginalData(data);
       } catch (error) {
@@ -164,10 +163,6 @@ function OriginalDataComponent() {
         )
       },
       enableSorting: true 
-    },
-    { 
-      accessorKey: "additional_comments", 
-      header: "Additional Comments" 
     },
 
   ];

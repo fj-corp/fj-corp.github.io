@@ -66,8 +66,8 @@ function Explore() {
                 </div>
 
                 <div className='ml-8 mr-8 mb-4'>
-                    <h1 className='text-3xl text-white break-words'>
-                        Raw historical data of all the leetcode problems I've solved. Comes with commentary of my frustrations and general thoughts.
+                    <h1 className='text-3xl text-white break-words font-light'>
+                        Raw historical data of all the leetcode problems I've solved, time taken on them, and date of attempt.
                     </h1>
                     <OriginalDataComponent />
                 </div>

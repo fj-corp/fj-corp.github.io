@@ -5,5 +5,4 @@ export default interface OriginalDataInterface {
     worth_reviewing: string;
     question: string;
     difficulty: string;
-    additional_comments: string;
 }
