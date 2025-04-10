@@ -1,4 +1,5 @@
-import { db } from './firebase'
+import { db, auth } from './firebase'
+import { signInAnonymously, onAuthStateChanged } from 'firebase/auth';
 import { collection, getDocs } from 'firebase/firestore'
 import { useEffect, useState } from 'react';
 import {
@@ -37,6 +38,24 @@ function OriginalDataComponent() {
     const fetchMonthlyData = async () => {
       try {
         setLoading(true);
+
+        // Authenticate anonymously, necessary for Firestore access, disallow scrapers and bots from causing havoc
+        await new Promise<void>((resolve, reject) => {
+          onAuthStateChanged(auth, async (user) => {
+            if (user) {
+              resolve();
+            } else {
+              try {
+                await signInAnonymously(auth);
+                resolve();
+              } catch (err) {
+                reject(err);
+              }
+            }
+          });
+        });
+
+        // reads of the firestore database
         const originalDocRef = collection(db, 'leetcode_data/original_data/submissions');
         const originalDocData = await getDocs(originalDocRef);
         const data: OriginalDataInterface[] = originalDocData.docs.map((doc) => ({
@@ -60,23 +79,19 @@ function OriginalDataComponent() {
 
   const columns: ColumnDef<OriginalDataInterface>[] = [
     { 
-      accessorKey: "daily", 
+      accessorKey: "date_completed", 
       header: ({ column }) => {
         return (
           <Button
             className='dark:text-white !p-2'
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Leetcode Daily
+            Attempted Date
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </Button>
         )
       },
       enableSorting: true 
-    },
-    { 
-      accessorKey: "date_completed", 
-      header: "Date Completed"
     },
     { 
       accessorKey: "time_spent", 
@@ -97,13 +112,13 @@ function OriginalDataComponent() {
       accessorKey: "worth_reviewing", 
       header: ({ column }) => {
         return (
-          <Button
-            className='dark:text-white !p-2'
-            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-          >
-            Worth Reviewing
-            <ArrowUpDown className="ml-2 h-4 w-4" />
-          </Button>
+            <Button
+              className='dark:text-white !px-2'
+              onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+            >
+              Worth Reviewing
+              <ArrowUpDown className="ml-2 h-4 w-4" />
+            </Button>
         )
       },
       enableSorting: true 
@@ -111,7 +126,6 @@ function OriginalDataComponent() {
     { 
       accessorKey: "question", 
       header: "Question",
-      enableColumnFilter: true,
     },
     { 
       accessorKey: "difficulty", 
@@ -137,9 +151,25 @@ function OriginalDataComponent() {
       },
     },
     { 
+      accessorKey: "daily", 
+      header: ({ column }) => {
+        return (
+          <Button
+            className='dark:text-white !p-2'
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Leetcode Daily
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </Button>
+        )
+      },
+      enableSorting: true 
+    },
+    { 
       accessorKey: "additional_comments", 
       header: "Additional Comments" 
     },
+
   ];
 
   const handleDifficultyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -174,8 +204,8 @@ function OriginalDataComponent() {
   });
 
   return (
-    <div className="flex flex-col container justify-center w-full space-y-4 mt-4">
-        <div className="flex items-center justify-between">
+    <div className="flex flex-col container w-full mt-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex flex-col items-center gap-2 w-full max-w-sm">
                 <Input
                     placeholder="Search by question name or number.."
@@ -216,50 +246,50 @@ function OriginalDataComponent() {
         {loading ? (
             <div className="flex justify-center py-8">Loading data...</div>
         ) : (
-            <>
-                <div className="flex flex-col rounded-md border">
-                    <Table>
-                        <TableHeader>
-                            {table.getHeaderGroups().map((headerGroup) => (
-                            <TableRow key={headerGroup.id} className='bg-[#515a5e]'>
-                                {headerGroup.headers.map((header) => (
-                                <TableHead key={header.id}>
-                                    {header.isPlaceholder
-                                    ? null
-                                    : flexRender(
-                                        header.column.columnDef.header,
-                                        header.getContext()
-                                        )}
-                                </TableHead>
-                                ))}
-                            </TableRow>
-                            ))}
-                        </TableHeader>
-                        <TableBody className='text-white'>
-                            {table.getRowModel().rows?.length ? (
-                            table.getRowModel().rows.map((row) => (
-                                <TableRow
-                                key={row.id}
-                                data-state={row.getIsSelected() && "selected"}
-                                >
-                                {row.getVisibleCells().map((cell) => (
-                                    <TableCell key={cell.id}>
-                                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                    </TableCell>
-                                ))}
-                                </TableRow>
-                            ))
-                            ) : (
-                            <TableRow>
-                                <TableCell colSpan={columns.length} className="h-24 text-center">
-                                No results.
-                                </TableCell>
-                            </TableRow>
+          <div className="rounded-sm border">
+            <Table className='table-auto'>
+              <TableHeader>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow key={headerGroup.id} className='bg-[#515a5e]'>
+                    {headerGroup.headers.map((header) => (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
                             )}
-                        </TableBody>
-                    </Table>
-                </div>
-            </>
+                      </TableHead>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableHeader>
+
+              <TableBody className='text-white'>
+                {table.getRowModel().rows?.length ? (
+                  table.getRowModel().rows.map((row) => (
+                    <TableRow
+                      key={row.id}
+                      data-state={row.getIsSelected() && "selected"}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id}>
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={columns.length} className="h-24 text-center">
+                      You're so much better than me if you didn't find the question you're looking for. 5 booms for you!
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+
+            </Table>
+          </div>
         )}
     </div>
   );

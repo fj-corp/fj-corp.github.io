@@ -13,5 +13,8 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "./src"), // Map "@" to the "src" directory
     },
-  }
+  },
+  build: {
+    outDir: 'docs',
+  },
 })

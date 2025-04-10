@@ -43,7 +43,7 @@ def readLeetcodeSheet() -> tuple:
 
 
             split_date = date.split("/")
-            monthPlusYearDate = f"{split_date[2]}-{split_date[0]}"
+            monthPlusYearDate = f"{split_date[2]}-{split_date[0]}" # year-month
 
             analyticsObj = monthlyData[monthPlusYearDate][difficulty]
             analyticsObj.update_count()
@@ -59,9 +59,9 @@ def readLeetcodeSheet() -> tuple:
             runningDifficultyTimeCounter[difficulty] += timeSpent 
             runningDifficultyCount[difficulty] += 1
 
+            monthPlusYearPlusDate = f"{split_date[2]}-{split_date[0]}-{split_date[1]}" # year-month-day, lexicographically sorted for javascript to sort easily
+            sanitizedOriginalData.append([currRow[0], currRow[1], difficulty, currRow[3], currRow[4], monthPlusYearPlusDate, currRow[6]])
 
-            sanitizedOriginalData.append([currRow[0], currRow[1], difficulty, currRow[3], currRow[4], '-'.join(split_date), currRow[6]])
-        
 
         # Just updating 'runningDifficultyTimeCounter' to get average from 'runningDifficultyTimeCounter' of how many questions were done
         for difficulty, count in runningDifficultyCount.items():

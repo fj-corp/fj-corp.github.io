@@ -14,7 +14,7 @@ function Explore() {
 
     return (
         <div className="flex flex-col items-center justify-center w-full">
-            <div className='max-w-6xl'>
+            <div className='md:max-w-6xl'>
                 <div className='text-4xl text-white mt-10 ml-8 heading-override'>
                     <h1 className="inline-block font-semibold">Projects</h1>
                 </div>
@@ -57,22 +57,23 @@ function Explore() {
                 </div>
             </div>
         
-            <div className='max-w-6xl mt-6'>
-                <div className='text-4xl text-white mt-10 ml-8 heading-override'>
+            <div className='flex flex-col md:max-w-6xl mt-6 w-full'>
+                <div className='text-4xl text-white mt-10 ml-8 mr-8 heading-override'>
                     <h1 className="inline-block font-semibold">My Leetcode Analytics</h1>
                 </div>
                 <div className='mr-20'>
                     <hr className="w-full mt-3 ml-8 mb-10" />
                 </div>
 
-                <div className='mt-10 ml-8 mr-8 mb-4'>
-                    <h1 className='inline-flex text-3xl text-white break-words'>
+                <div className='ml-8 mr-8 mb-4'>
+                    <h1 className='text-3xl text-white break-words'>
                         Raw historical data of all the leetcode problems I've solved. Comes with commentary of my frustrations and general thoughts.
                     </h1>
                     <OriginalDataComponent />
                 </div>
-
+                
             </div>
+            
         </div>
     )
 }
