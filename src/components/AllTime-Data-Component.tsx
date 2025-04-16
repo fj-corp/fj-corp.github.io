@@ -62,7 +62,7 @@ const AllTimeDataComponent = () => {
             {loading ? (
                 <div className="flex justify-center py-8">Loading all data...</div>
             ) : (
-                <div className="flex flex-row items-center justify-center mt-6 px-2 space-x-8">
+                <div className="flex flex-row items-center justify-center mt-6 space-x-8">
                     <p className="text-lg">
                         Easy: {allData["Easy"]?.count} problems, {allData["Easy"]?.avg_time} min average time
                     </p>

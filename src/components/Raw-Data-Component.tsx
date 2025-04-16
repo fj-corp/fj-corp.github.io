@@ -259,7 +259,7 @@ const RawDataComponent = () => {
         </div>
 
         {loading ? (
-            <div className="flex justify-center py-8">Loading data...</div>
+            <div className="flex justify-center py-8">Loading raw data...</div>
         ) : (
           <div className="rounded-sm border">
             <Table className='table-auto'>

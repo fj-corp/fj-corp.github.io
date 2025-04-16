@@ -21,6 +21,9 @@ const Layout = () => {
 }
 
 const Home = () => {
+
+  console.log("If you're reading this, let's talk about how I can add value to your business/team! :)")
+
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">
       <div className="flex flex-col items-center space-y-8 -mt-75 overflow-hidden logo">
