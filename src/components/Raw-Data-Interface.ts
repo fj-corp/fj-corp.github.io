@@ -1,4 +1,4 @@
-export default interface OriginalDataInterface {
+export default interface RawDataInterface {
     daily: string;
     date_completed: string;
     time_spent: string;

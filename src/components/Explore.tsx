@@ -7,10 +7,11 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel"
 import { IoIosLink } from 'react-icons/io'
-import OriginalDataComponent from './Original-Data-Component'
+import RawDataComponent from './Raw-Data-Component'
+import AllTimeDataComponent from './AllTime-Data-Component'
 
 
-function Explore() {
+const Explore = () => {
 
     return (
         <div className="flex flex-col items-center justify-center w-full">
@@ -69,7 +70,8 @@ function Explore() {
                     <h1 className='text-3xl text-white break-words font-light'>
                         Raw historical data of all the leetcode problems I've solved, time taken on them, and date of attempt.
                     </h1>
-                    <OriginalDataComponent />
+                    <AllTimeDataComponent />
+                    <RawDataComponent />
                 </div>
                 
             </div>

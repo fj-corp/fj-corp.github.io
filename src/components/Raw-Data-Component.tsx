@@ -21,23 +21,40 @@ import {
   type SortingState,
   type ColumnFiltersState,
 } from "@tanstack/react-table";
-import OriginalDataInterface from './Original-Data-Interface';
+import RawDataInterface from './Raw-Data-Interface';
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
+import MonthlyDataComponent from './Monthly-Data-Component';
 
-function OriginalDataComponent() {
-  const [originalData, setOriginalData] = useState<OriginalDataInterface[]>([]);
+// function to create an array of year-month strings from the date_completed field to be used by Monthly-Data-Component.tsx
+const createMonthlyData = (oGT_array: RawDataInterface[]): string[] => {
+  const result: string[] = [];
+
+  for (let i = 0; i < oGT_array.length; i++) {
+    const splitted_date = (oGT_array[i].date_completed).split("-");
+    const monthPlusYear = `${splitted_date[0]}-${splitted_date[1]}`;
+    result.push(monthPlusYear);
+  }
+
+  const resultIntoSet = new Set(result);
+  const resultIntoArray: string[] = Array.from(resultIntoSet);
+
+  return resultIntoArray;
+}
+
+const RawDataComponent = () => {
+  const [originalData, setOriginalData] = useState<RawDataInterface[]>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [difficultyFilter, setDifficultyFilter] = useState<string>("");
+  const [yearMonthArr, setMyearMonthArr] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchMonthlyData = async () => {
       try {
-        setLoading(true);
 
         // Authenticate anonymously, necessary for Firestore access, disallow scrapers and bots from causing havoc
         await new Promise<void>((resolve, reject) => {
@@ -58,7 +75,7 @@ function OriginalDataComponent() {
         // reads of the firestore database
         const originalDocRef = collection(db, 'leetcode_data/original_data/submissions');
         const originalDocData = await getDocs(originalDocRef);
-        const data: OriginalDataInterface[] = originalDocData.docs.map((doc) => ({
+        const data: RawDataInterface[] = originalDocData.docs.map((doc) => ({
           daily: doc.data().daily,
           date_completed: doc.data().date_completed,
           time_spent: doc.data().time_spent,
@@ -67,6 +84,9 @@ function OriginalDataComponent() {
           difficulty: doc.data().difficulty,
         }));
         setOriginalData(data);
+
+        setMyearMonthArr(createMonthlyData(data)); // doing this so that I can parse data and export an array of year-month strings for Monthly-Data-Component 
+
       } catch (error) {
         console.error('Error fetching original data: ', error);
       } finally {
@@ -76,7 +96,7 @@ function OriginalDataComponent() {
     fetchMonthlyData();
   }, []);
 
-  const columns: ColumnDef<OriginalDataInterface>[] = [
+  const columns: ColumnDef<RawDataInterface>[] = [
     { 
       accessorKey: "date_completed", 
       header: ({ column }) => {
@@ -286,8 +306,14 @@ function OriginalDataComponent() {
             </Table>
           </div>
         )}
+      
+      {/* Pass the monthly data to the MonthlyDataComponent, I don't think useContext is necessary here */}
+      { loading ? (<div className="flex justify-center py-8">Loading graphs...</div>) 
+      : (<MonthlyDataComponent data={yearMonthArr} />)}
+      
+
     </div>
   );
 }
 
-export default OriginalDataComponent;
+export default RawDataComponent;
