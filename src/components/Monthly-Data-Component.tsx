@@ -106,7 +106,7 @@ const MonthlyDataComponent: React.FC<YearMonthPropsInterface> = ({ data }) => {
     return (
         <div className="mt-10">
             <h1 className='text-3xl text-white break-words font-light'>
-                Here's a look at how much time (in minutes) I spent each month on Easy, Medium, and Hard problems, along with how many I solved. The graphs show Easy, Medium, and Hard in that order.
+                Here's a look at how much time (in minutes) I spent each month on Easy, Medium, and Hard problems. The graphs show data in that order.
             </h1>
         { loading ? (<div className="flex justify-center py-8">Loading graphs...</div>) 
             : (
