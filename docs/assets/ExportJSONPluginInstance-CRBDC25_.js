@@ -1,0 +1,1 @@
+var e=class{#e;constructor(e){this.#e=e}async export(e){let t={supported:!1};return e===`json`&&(t.supported=!0,t.blob=await this.#t()),t}#t=async()=>{let e=JSON.stringify(this.#e.actualOptions,(e,t)=>{if(!e.startsWith(`_`))return t},2);return Promise.resolve(new Blob([e],{type:`application/json`}))}};export{e as ExportJSONPluginInstance};

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { db } from "./firebase";
 import { MonthlyDataInterface, YearMonthPropsInterface } from "./Monthly-Data-Interface";
 import { collection, getDocs } from 'firebase/firestore'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, TooltipProps } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, type TooltipContentProps } from 'recharts';
 import convertToMinutesSeconds from "./Seconds-To-Minutes-Function";
 
 const MonthlyDataComponent: React.FC<YearMonthPropsInterface> = ({ data }) => {
@@ -78,7 +78,7 @@ const MonthlyDataComponent: React.FC<YearMonthPropsInterface> = ({ data }) => {
 
     }, []);
 
-    const CustomTooltip = ({ active, payload, label }: TooltipProps<any, any>) => {
+    const CustomTooltip = ({ active, payload, label }: TooltipContentProps) => {
         if (active && payload && payload.length) {
             const data = payload[0].payload;
             return (
@@ -116,7 +116,7 @@ const MonthlyDataComponent: React.FC<YearMonthPropsInterface> = ({ data }) => {
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="yearAndMonth" />
                             <YAxis dataKey="avg_time" />
-                            <Tooltip content={<CustomTooltip />} />
+                            <Tooltip content={(props) => <CustomTooltip {...props} />} />
                             <Legend />
                             <Line type="monotone" dataKey="count" stroke="#8884d8" name="Easy Count" />
                             <Line type="monotone" dataKey="avg_time" stroke="#98b65a" name="Average Time" />
@@ -128,7 +128,7 @@ const MonthlyDataComponent: React.FC<YearMonthPropsInterface> = ({ data }) => {
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="yearAndMonth" />
                             <YAxis dataKey="avg_time" />
-                            <Tooltip content={<CustomTooltip />} />
+                            <Tooltip content={(props) => <CustomTooltip {...props} />} />
                             <Legend />
                             <Line type="monotone" dataKey="count" stroke="#8884d8" name="Medium Count" />
                             <Line type="monotone" dataKey="avg_time" stroke="#98b65a" name="Average Time" />
@@ -140,7 +140,7 @@ const MonthlyDataComponent: React.FC<YearMonthPropsInterface> = ({ data }) => {
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="yearAndMonth" />
                             <YAxis dataKey="avg_time" />
-                            <Tooltip content={<CustomTooltip />} />
+                            <Tooltip content={(props) => <CustomTooltip {...props} />} />
                             <Legend />
                             <Line type="monotone" dataKey="count" stroke="#8884d8" name="Hard Count" />
                             <Line type="monotone" dataKey="avg_time" stroke="#98b65a" name="Average Time" />

@@ -1,18 +1,15 @@
-import { useEffect, useState, useMemo } from "react";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
+import { useMemo, useCallback } from "react";
+import Particles, { ParticlesProvider } from "@tsparticles/react";
 import {
+    type Engine,
     type ISourceOptions
   } from "@tsparticles/engine";
 import { loadAll } from "@tsparticles/all";
 
 const ParticleConfig = () => {
-    const [init, setInit] = useState(false);
-    useEffect(() => {
-        initParticlesEngine(async (engine) => {
-            await loadAll(engine);
-        }).then(() => setInit(true));
+    const initParticles = useCallback(async (engine: Engine) => {
+        await loadAll(engine);
     }, []);
-
 
     /**
     const particlesLoaded = async (container?: Container) => {
@@ -144,17 +141,15 @@ const ParticleConfig = () => {
         [],
       );
 
-    if (init) {
         return (
+                    <ParticlesProvider init={initParticles}>
           <Particles
             id="tsparticles"
             // particlesLoaded={particlesLoaded}
             options={options}
           />
-        );
-    }
-    
-    return <></>;
+                    </ParticlesProvider>
+                );
 };
 
 export default ParticleConfig;

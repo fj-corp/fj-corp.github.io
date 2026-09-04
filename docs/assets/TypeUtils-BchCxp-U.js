@@ -1,0 +1,1 @@
+function e(e){return typeof e==`boolean`}function t(e){return typeof e==`string`}function n(e){return typeof e==`number`}function r(e){return typeof e==`function`}function i(e){return typeof e==`object`&&!!e}function a(e){return Array.isArray(e)}function o(e){return e==null}export{n as a,o as i,e as n,i as o,r,t as s,a as t};
